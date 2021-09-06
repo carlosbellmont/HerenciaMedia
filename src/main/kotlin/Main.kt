@@ -1,14 +1,5 @@
 fun main() {
 
-    val objetoPadre = ClasePadre()
-
-    // el objeto padre puede:
-    println("El padre tiene un atributo que es ${objetoPadre.atributoPadre}")
-    objetoPadre.funDelPadre()
-    // Sin embargo no podrá (dará error) acceder a la funciones y métodos del hijo ya que directamente no las tiene.
-    // println("El padre tiene un atributo que es ${objetoPadre.atributoHijo}")
-    // objetoPadre.funDelHijo()
-
     val objetoHijo = ClaseHija()
     // Puede acceder a las funciones y métodos del padre
     println("El padre tiene un atributo que es ${objetoHijo.atributoPadre}")
@@ -25,11 +16,23 @@ class ClaseHija : ClasePadre() {
     fun funDelHijo() {
         println("Se ha llamado a la función del Padre siendo ${javaClass.name}")
     }
-}
 
-open class ClasePadre {
-    val atributoPadre = 1
-    fun funDelPadre() {
+    override fun funDelPadre() {
+        super.funDelPadre()
         println("Se ha llamado a la función del hijo")
     }
+
+    override fun funAbstracta() {
+        println("Esto es una función abstracta")    }
+
+
+}
+
+abstract class ClasePadre {
+    val atributoPadre = 1
+    open fun funDelPadre() {
+        println("Se ha llamado a la función del hijo")
+    }
+
+    abstract fun funAbstracta()
 }
